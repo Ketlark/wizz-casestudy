@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "eslint": "./node_modules/.bin/eslint .",
     "test": "NODE_ENV=test node_modules/.bin/sequelize db:migrate; NODE_ENV=test ./node_modules/.bin/mocha --exit 'test/*.js'; rm ./database_test.sqlite3"
   },
   "author": "Voodoo G&A",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.9.0",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "sequelize": "^5.10.0",
