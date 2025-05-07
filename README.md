@@ -67,4 +67,25 @@ Please elaborate an action plan.
 Let's pretend our data team is now delivering new files every day into the S3 bucket, and our service needs to ingest those files
 every day through the populate API. Could you describe a suitable solution to automate this? Feel free to propose architectural changes.
 
+## Production Readiness & Strategy
+
+### Potnetial missing parts for production-ready serve (Question 1)
+
+- Security : Add rate limiting, input validation, JWT authentication
+- Observability : Implement Prometheus/Grafana for metrics, Winston logging or equivalent services
+- Scalability : Implement auto-scaling for Lambda functions, add caching mechanisms
+- Database : Think about migrate to a more robust database (Postgres, MySQL)
+- Infrastructure : Containerization (Kube, Docker) and API gateway with load balancer
+- CI/CD : Implement multi-stage builds, security scanning in pipeline (dependencies), testing and deployment
+- Error Handling : Implement centralized error handling, error reporting
+- Testing : Implement unit, integration, and end-to-end tests for needed scenarios
+
+### Action Plan (Question 2)
+
+- Event-Driven Architecture : Use S3 Event Notifications -> SQS -> Lambda
+- Batch processing : Subscribe Lambda workers to SQS queue to process in batches
+- Idempotency : Add checksum validation for processed files to avoid processing same file twice
+- Error Handling : Implement dead-letter queue for failed messages/events and exponential backoff for failed ones
+- Observability : Implement monitoring about function execution, processing time, error rates etc ...
+
 
